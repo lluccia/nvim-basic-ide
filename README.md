@@ -4,7 +4,13 @@ The config may work but is not guaranteed to work with future versions of Neovim
 
 ## Setup 
 
-1. Make sure you have Java 11 or greater installed, you will also need `npm` installed for the testing bundle
+1. Make sure you have Java 17 or greater installed, you will also need `npm` installed for the testing bundle
+H
+```sh
+curl -s "https://get.sdkman.io" | bash
+
+sdk install java 17.0.4.1-tem
+```
 
 2. Install jdtls
 
@@ -17,7 +23,7 @@ Open update Neovim and install `jdtls`
 3. Install [java-debug](https://github.com/microsoft/java-debug)
 
 ```sh
-git clone https://github.com/microsoft/java-debug ~/.config/nvim/java-debug
+git clone https://github.com/microsoft/java-debug ~/.local/share/nvim/java-debug
 
 cd ~/.config/nvim/java-debug
 
@@ -27,7 +33,7 @@ cd ~/.config/nvim/java-debug
 4. Install [vscode-java-test](https://github.com/microsoft/vscode-java-test)
 
 ```sh
-git clone https://github.com/microsoft/vscode-java-test.git ~/.config/nvim/vscode-java-test
+git clone https://github.com/microsoft/vscode-java-test.git ~/.local/share/nvim/vscode-java-test
 
 cd ~/.config/nvim/vscode-java-test
 
@@ -52,6 +58,14 @@ You can read more about it here: [google-java-format](https://github.com/google/
 
   ```sh
   paru -S google-java-format
+  ```
+
+- Linux
+
+  ```sh
+  asdf plugin add google-java-format https://github.com/lluccia/asdf-google-java-format.github
+  adsf install google-java-format latest
+  asdf global google-java-format latest
   ```
 
 Alternatively you can use the formatter builtin with `jdtls` by:
