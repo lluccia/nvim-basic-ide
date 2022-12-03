@@ -37,11 +37,11 @@ local bundles = {}
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
 vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
 vim.list_extend(
-	bundles,
-	vim.split(
-		vim.fn.glob(mason_path .. "packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
-		"\n"
-	)
+  bundles,
+  vim.split(
+    vim.fn.glob(mason_path .. "packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+    "\n"
+  )
 )
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
@@ -55,7 +55,7 @@ local config = {
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
-		"-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
+    "-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
     "-Xms1g",
     "--add-modules=ALL-SYSTEM",
     "--add-opens",
@@ -63,9 +63,9 @@ local config = {
     "--add-opens",
     "java.base/java.lang=ALL-UNNAMED",
     "-jar",
-		vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
+    vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
     "-configuration",
-		home .. "/.local/share/nvim/mason/packages/jdtls/config_" .. CONFIG,
+    home .. "/.local/share/nvim/mason/packages/jdtls/config_" .. CONFIG,
     "-data",
     workspace_dir,
   },
@@ -73,7 +73,6 @@ local config = {
   on_attach = require("user.lsp.handlers").on_attach,
   capabilities = require("user.lsp.handlers").capabilities,
 
-  -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
   root_dir = root_dir,
@@ -93,6 +92,10 @@ local config = {
           {
             name = "JavaSE-1.8",
             path = home .. "/.sdkman/candidates/java/8.0.345-tem/",
+          },
+          {
+            name = "JavaSE-11",
+            path = home .. "/.sdkman/candidates/java/11.0.17-tem/",
           },
           {
             name = "JavaSE-17",
@@ -163,34 +166,49 @@ local config = {
   },
 }
 
+config["on_attach"] = function(client, bufnr)
+  local _, _ = pcall(vim.lsp.codelens.refresh)
+
+  require("jdtls.dap").setup_dap_main_class_configs()
+
+  jdtls.setup_dap({ hotcodereplace = "auto" })
+
+  local map = function(mode, lhs, rhs, desc)
+    if desc then
+      desc = desc
+    end
+
+    vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+  end
+
+  map("n", "<leader>jo", jdtls.organize_imports, "Organize Imports")
+  map("n", "<leader>jv", jdtls.extract_variable, "Extract Variable")
+  map("n", "<leader>jc", jdtls.extract_constant, "Extract Constant")
+  map("n", "<leader>jt", jdtls.test_nearest_method, "Test Method")
+  map("n", "<leader>jT", jdtls.test_class, "Test Class")
+  map("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", "Update Config")
+  map("v", "<leader>jv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable")
+  map("v", "<leader>jc", "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant")
+  map("v", "<leader>jm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method")
+end
+
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.java" },
   callback = function()
-    vim.lsp.codelens.refresh()
+    local _, _ = pcall(vim.lsp.codelens.refresh)
   end,
 })
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-require("jdtls").start_or_attach(config)
+jdtls.start_or_attach(config)
 
-vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
-vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
-vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
-vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
+vim.cmd(
+  [[command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)]]
+)
+-- vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
+-- vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
+-- -- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
+-- vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
+-- -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
 
--- Shorten function name
-local keymap = vim.keymap.set
--- Silent keymap option
-local opts = { silent = true }
-
-keymap("n", "<leader>jo", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
-keymap("n", "<leader>jv", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
-keymap("n", "<leader>jc", "<Cmd>lua require('jdtls').extract_constant()<CR>", opts)
-keymap("n", "<leader>jt", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
-keymap("n", "<leader>jT", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
-keymap("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", opts)
-
-keymap("v", "<leader>jv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
-keymap("v", "<leader>jc", "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", opts)
-keymap("v", "<leader>jm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
