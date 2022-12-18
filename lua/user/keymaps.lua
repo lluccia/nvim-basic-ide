@@ -79,3 +79,10 @@ keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
 keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+
+
+-- Snippet choices
+keymap("i", "<C-n>", "<Plug>luasnip-next-choice", opts )
+keymap("s", "<C-n>", "<Plug>luasnip-next-choice", opts )
+keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", opts )
+keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", opts )
