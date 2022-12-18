@@ -49,7 +49,7 @@ local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = {
-    "java",
+    home .. "/.sdkman/candidates/java/17.0.5-tem/bin/" .. "java",
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -99,7 +99,7 @@ local config = {
           },
           {
             name = "JavaSE-17",
-            path = home .. "/.sdkman/candidates/java/17.0.4.1-tem/",
+            path = home .. "/.sdkman/candidates/java/17.0.5-tem/",
           },
         }
       },
