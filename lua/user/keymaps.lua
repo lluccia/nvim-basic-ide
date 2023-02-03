@@ -86,3 +86,9 @@ keymap("i", "<C-n>", "<Plug>luasnip-next-choice", opts )
 keymap("s", "<C-n>", "<Plug>luasnip-next-choice", opts )
 keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", opts )
 keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", opts )
+
+-- Copy/paste to system clipboard
+keymap("n", "<leader>y", '"+y')
+keymap("v", "<leader>y", '"+y')
+keymap("n", "<leader>p", '"+p')
+keymap("v", "<leader>p", '"+p')
