@@ -105,6 +105,9 @@ return packer.startup(function(use)
   -- Java
   use { "mfussenegger/nvim-jdtls" }
 
+  -- Markdown preview
+  use { 'toppair/peek.nvim', run = 'deno task --quiet build:fast' }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
