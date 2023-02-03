@@ -170,6 +170,7 @@ config["on_attach"] = function(client, bufnr)
   local _, _ = pcall(vim.lsp.codelens.refresh)
 
   require("jdtls.dap").setup_dap_main_class_configs()
+  require("user.lsp.handlers").lsp_keymaps(bufnr)
 
   jdtls.setup_dap({ hotcodereplace = "auto" })
   jdtls.setup.add_commands()
