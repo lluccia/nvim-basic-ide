@@ -59,6 +59,7 @@ return packer.startup(function(use)
   use { "lewis6991/impatient.nvim" }
   use { "lukas-reineke/indent-blankline.nvim" }
   use { "goolord/alpha-nvim" }
+  use { "ThePrimeagen/harpoon" }
 
   -- Colorschemes
   use { "folke/tokyonight.nvim" }
@@ -89,10 +90,7 @@ return packer.startup(function(use)
   use { "nvim-telescope/telescope.nvim", branch = "0.1.x" }
 
   -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    commit = "44289d817e7ec9df9bbe874ebe24a96375d59e16",
-  }
+  use { "nvim-treesitter/nvim-treesitter" }
 
   -- Git
   use { "lewis6991/gitsigns.nvim" }
@@ -107,6 +105,8 @@ return packer.startup(function(use)
 
   -- Markdown preview
   use { 'toppair/peek.nvim', run = 'deno task --quiet build:fast' }
+
+  use { 'editorconfig/editorconfig-vim' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
