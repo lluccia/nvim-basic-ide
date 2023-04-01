@@ -126,3 +126,7 @@ cmp.setup({
 		ghost_text = true,
 	},
 })
+
+-- luasnip keybinding for selecting snippets with multiple choices
+vim.api.nvim_set_keymap("i", "<C-u>", "<cmd>lua require('luasnip.extras.select_choice')()<cr>", {})
+
