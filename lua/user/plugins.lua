@@ -85,7 +85,8 @@ return packer.startup(function(use)
   use { "RRethy/vim-illuminate" }
 
   use { 'j-hui/fidget.nvim' }
-
+  use { 'simrat39/symbols-outline.nvim' }
+  
   -- Telescope
   use { "nvim-telescope/telescope.nvim", branch = "0.1.x" }
 
