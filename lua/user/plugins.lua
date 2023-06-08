@@ -77,4 +77,5 @@ require("lazy").setup({
 
   "editorconfig/editorconfig-vim",
 
+  { 'echasnovski/mini.nvim', version = '*' },
 })
