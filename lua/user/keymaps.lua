@@ -92,3 +92,7 @@ keymap("n", "<leader>y", '"+y')
 keymap("v", "<leader>y", '"+y')
 keymap("n", "<leader>p", '"+p')
 keymap("v", "<leader>p", '"+p')
+
+-- insert lines without entering in insert mode
+keymap("n", "<leader>o", 'o<Esc>0"_D')
+keymap("n", "<leader>O", 'O<Esc>0"_D')
