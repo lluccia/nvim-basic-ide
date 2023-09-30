@@ -52,7 +52,7 @@ require("lazy").setup({
   "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
   "RRethy/vim-illuminate",
 
-  "j-hui/fidget.nvim",
+  { "j-hui/fidget.nvim", tag = "legacy" },
   "simrat39/symbols-outline.nvim",
 
   -- Telescope
