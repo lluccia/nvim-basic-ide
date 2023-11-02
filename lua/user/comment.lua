@@ -27,3 +27,6 @@ comment.setup({
 		end
 	end,
 })
+
+local ft = require('Comment.ft')
+ft.jq = '#%s'
