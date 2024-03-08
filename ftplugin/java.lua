@@ -44,12 +44,14 @@ vim.list_extend(
   )
 )
 
+local sdkman_java = require("user.sdkman-java")
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = {
-    home .. "/.sdkman/candidates/java/21.0.1-tem/bin/" .. "java",
+    sdkman_java.java_versions[21].path .. "/bin/java",
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -88,24 +90,7 @@ local config = {
       },
       configuration = {
         updateBuildConfiguration = "interactive",
-        runtimes = {
-          {
-            name = "JavaSE-1.8",
-            path = home .. "/.sdkman/candidates/java/8.0.392-tem",
-          },
-          {
-            name = "JavaSE-11",
-            path = home .. "/.sdkman/candidates/java/11.0.21-tem",
-          },
-          {
-            name = "JavaSE-17",
-            path = home .. "/.sdkman/candidates/java/17.0.9-tem",
-          },
-          {
-            name = "JavaSE-21",
-            path = home .. "/.sdkman/candidates/java/21.0.1-tem",
-          },
-        }
+        runtimes = sdkman_java.runtimes
       },
       maven = {
         downloadSources = true,
