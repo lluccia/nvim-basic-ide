@@ -64,6 +64,7 @@ require("lazy").setup({
 
   -- Git
   "lewis6991/gitsigns.nvim",
+  "tpope/vim-fugitive",
 
   -- DAP
   "mfussenegger/nvim-dap",
