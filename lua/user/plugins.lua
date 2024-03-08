@@ -60,7 +60,7 @@ require("lazy").setup({
   { "nvim-telescope/telescope.nvim", branch = "0.1.x" },
 
   -- Treesitter
-  "nvim-treesitter/nvim-treesitter",
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
 
   -- Git
   "lewis6991/gitsigns.nvim",
