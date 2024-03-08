@@ -73,7 +73,12 @@ require("lazy").setup({
   "mfussenegger/nvim-jdtls",
 
   -- Markdown preview
-  { "toppair/peek.nvim", build = "deno task --quiet build:fast" },
+  {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      ft = { "markdown" },
+      build = function() vim.fn["mkdp#util#install"]() end,
+  },
 
   "editorconfig/editorconfig-vim",
 
