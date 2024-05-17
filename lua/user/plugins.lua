@@ -19,7 +19,7 @@ require("lazy").setup({
   "JoosepAlviste/nvim-ts-context-commentstring",
   "kyazdani42/nvim-web-devicons",
   "kyazdani42/nvim-tree.lua",
-  { "akinsho/bufferline.nvim", version = "v3.*"},
+  "akinsho/bufferline.nvim",
   "moll/vim-bbye",
   "nvim-lualine/lualine.nvim",
   "akinsho/toggleterm.nvim",
