@@ -162,7 +162,6 @@ config["on_attach"] = function(client, bufnr)
   require("user.lsp.handlers").lsp_keymaps(bufnr)
 
   jdtls.setup_dap({ hotcodereplace = "auto" })
-  jdtls.setup.add_commands()
 
   local map = function(mode, lhs, rhs, desc)
     if desc then
