@@ -15,8 +15,6 @@ require("lazy").setup({
   -- My plugins here
   "nvim-lua/plenary.nvim", -- Useful lua functions used by lots of plugins
   "windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
-  "numToStr/Comment.nvim",
-  "JoosepAlviste/nvim-ts-context-commentstring",
   "kyazdani42/nvim-web-devicons",
   "kyazdani42/nvim-tree.lua",
   "akinsho/bufferline.nvim",
