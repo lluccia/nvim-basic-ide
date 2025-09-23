@@ -46,8 +46,7 @@ require("lazy").setup({
 
   -- LSP
   "neovim/nvim-lspconfig", -- enable LSP
-  "mason-org/mason.nvim",
-  "mason-org/mason-lspconfig.nvim",
+  { "mason-org/mason.nvim", opts = {}},
   "nvimtools/none-ls.nvim", -- for formatters and linters
   "RRethy/vim-illuminate",
 
