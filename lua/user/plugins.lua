@@ -51,8 +51,15 @@ require("lazy").setup({
   "RRethy/vim-illuminate",
 
   { "j-hui/fidget.nvim", tag = "legacy" },
-  "simrat39/symbols-outline.nvim",
-
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+       "nvim-treesitter/nvim-treesitter",
+       "nvim-tree/nvim-web-devicons"
+    },
+  },
   -- Telescope
   { "nvim-telescope/telescope.nvim", branch = "0.1.x" },
 
