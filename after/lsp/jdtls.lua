@@ -7,7 +7,7 @@ local workspace_dir = home .. "/.jdtls/" .. project_name
 ---@type vim.lsp.Config
 return {
   cmd = {
-    java_runtimes.java_versions[21].path .. "/bin/java",
+    java_runtimes.java_versions[25].path .. "/bin/java",
     -- "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     -- "-Dosgi.bundles.defaultStartLevel=4",
     -- "-Declipse.product=org.eclipse.jdt.ls.core.product",
