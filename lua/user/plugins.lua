@@ -81,13 +81,14 @@ require("lazy").setup({
 
   -- Markdown preview
   {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      ft = { "markdown" },
-      build = function() vim.fn["mkdp#util#install"]() end,
+    'brianhuster/live-preview.nvim',
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    },
   },
 
   "editorconfig/editorconfig-vim",
 
   { 'echasnovski/mini.nvim', version = '*' },
+
 })
